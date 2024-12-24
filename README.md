@@ -82,7 +82,9 @@ export PRIVATE_KEY_LOCAL=your_private_key_here
 ```bash
 # Enable networks
 export ENABLED_NETWORKS='arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn'
+export RPC_ENDPOINTS_L1RN='https://brn.rpc.caldera.xyz/'
 ```
+
 
 ### Optional RPC Configuration
 By default, `EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true`. If you want to use custom RPCs:
