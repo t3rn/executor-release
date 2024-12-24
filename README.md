@@ -65,6 +65,9 @@ export LOG_PRETTY=false
 # Process Settings
 export EXECUTOR_PROCESS_ORDERS=true
 export EXECUTOR_PROCESS_CLAIMS=true
+
+# Specify limit on gas usage(default = 10 gwei)
+export EXECUTOR_MAX_L3_GAS_PRICE=100
 ```
 
 ### Private Key Configuration
