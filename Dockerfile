@@ -1,8 +1,8 @@
-# Application version
-ARG APP_VERSION=v0.31.0
-
 # Use a minimal base image
 FROM debian:bullseye-slim
+
+# Application version
+ARG APP_VERSION=v0.31.0
 
 # Set working directory
 WORKDIR /app
