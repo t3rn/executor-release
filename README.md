@@ -166,4 +166,3 @@ For further assistance, join our [Discord community](https://discord.com/invite/
 - Available networks: `arbitrum-sepolia`, `base-sepolia`, `blast-sepolia`, `optimism-sepolia`, `l1rn`
 - Supported network shortnames for RPC configuration: `arbt`, `bssp`, `blss`, `opsp`
 - The executor will automatically disable networks where your wallet balance falls below the threshold
-  

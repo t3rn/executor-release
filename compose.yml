@@ -1,0 +1,50 @@
+services:
+  executor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Private Key, change to your own private key
+      PRIVATE_KEY_LOCAL: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+      
+      # 1. Set your preferred Node Environment
+      NODE_ENV: "testnet"
+
+      # 2. Set your log settings:
+      LOG_LEVEL: "debug"
+      LOG_PRETTY: "false"
+
+      # 3. Process orders and claims
+          # Set both to true if you want your Executor to process orders and claims.
+          # You can set them to false at any point. 
+          # I.e. EXECUTOR_PROCESS_ORDERS=false will stop your Executor from processing new orders.
+      EXECUTOR_PROCESS_ORDERS: "true"
+      EXECUTOR_PROCESS_CLAIMS: "true"
+
+
+      # 4. Specify limit on gas usage
+          # your executor will not taking order if L3 gas fee exceed this number 
+          # (check current gas fee here > https://brn.explorer.caldera.xyz/)
+      EXECUTOR_MAX_L3_GAS_PRICE: "100"
+
+      # NETWORKS & RPC (details > https://docs.t3rn.io/executor/become-an-executor/binary-setup#networks--rpc)
+      ENABLED_NETWORKS: "arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn"
+      RPC_ENDPOINTS_BSSP: "https://sepolia.base.org" # or change to your own custom rpc
+      RPC_ENDPOINTS_OPSP: "https://sepolia.optimism.io" # or change to your own custom rpc
+      RPC_ENDPOINTS_ARBT: "https://sepolia-rollup.arbitrum.io/rpc" # or change to your own custom rpc
+      RPC_ENDPOINTS_BLSS: "https://sepolia.blast.io" # or change to your own custom rpc
+      RPC_ENDPOINTS_L1RN: "https://brn.rpc.caldera.xyz" # or change to your own custom rpc
+      
+      # [Enable orders processing via RPC] ()
+      # set to false you want to process orders via RPC.
+      # Set to true to process via our API.
+      EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API: "false" 
+      
+
+    # -- [START] (optional) to prevent logging spam, remove '#' if you want to limit logging text to be saved --
+    # logging:
+    #   driver: "json-file"
+    #   options:
+    #     max-size: "500k"
+    #     max-file: "3"
+    # -- [END] (optional) to prevent logging spam, remove '#' if you want to limit logging text to be saved --
