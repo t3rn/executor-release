@@ -111,6 +111,7 @@ Once all configurations are set, start the executor:
 
 ## Optional Environment Configuration with .env
 By default, `PROMETHEUS_PORT=9090`. If you want to use custom port
+
 Adjust `PRIVATE_KEY_LOCAL` with you own private key
 
 ```bash
