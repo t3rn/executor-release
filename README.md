@@ -109,6 +109,51 @@ Once all configurations are set, start the executor:
 ./executor
 ```
 
+## Optional Environment Configuration with .env
+By default, `PROMETHEUS_PORT=9090`. If you want to use custom port
+Adjust `PRIVATE_KEY_LOCAL` with you own private key
+
+```bash
+cd executor/executor/bin
+```
+
+```bash
+nano .env
+```
+
+```bash
+ENVIRONMENT=testnet
+NODE_ENV=testnet
+LOG_LEVEL=debug
+LOG_PRETTY=false
+EXECUTOR_PROCESS_ORDERS=true
+EXECUTOR_PROCESS_CLAIMS=true
+EXECUTOR_MAX_L3_GAS_PRICE=100
+PRIVATE_KEY_LOCAL=0x...
+ENABLED_NETWORKS='arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn'
+RPC_ENDPOINTS_L1RN='https://brn.rpc.caldera.xyz/'
+RPC_ENDPOINTS='{
+    "l2rn": ["https://b2n.rpc.caldera.xyz/http"],
+    "arbt": ["https://arbitrum-sepolia.drpc.org", "https://sepolia-rollup.arbitrum.io/rpc"],
+    "bast": ["https://base-sepolia-rpc.publicnode.com", "https://base-sepolia.drpc.org"],
+    "blst": ["https://sepolia.blast.io", "https://blast-sepolia.drpc.org"],
+    "mont": ["https://testnet-rpc.monad.xyz"],
+    "opst": ["https://sepolia.optimism.io", "https://optimism-sepolia.drpc.org"],
+    "unit": ["https://unichain-sepolia.drpc.org", "https://sepolia.unichain.org"]
+}'
+PROMETHEUS_PORT=9090
+```
+
+```bash
+set -a
+source .env
+set +a
+```
+
+```bash
+./executor
+```
+
 ## Running Executor in Background
 
 ### Option 1: Using Screen (Recommended for Beginners)
