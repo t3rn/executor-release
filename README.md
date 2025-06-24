@@ -155,7 +155,7 @@ To verify the executor is running correctly:
 If you encounter issues:  
 - Verify all environment variables are set correctly.  
 - Ensure your private key is valid.  
-- Check network connectivity to enabled networks.  
+- Check network connectivity to enable networks.  
 - Verify sufficient balance in your wallet for each network.  
 
 For further assistance, join our [Discord community](https://discord.com/invite/S5kHFQTtp6) or watch the comprehensive [YouTube setup guide](https://youtu.be/KYFWwV6ZkLY).  
