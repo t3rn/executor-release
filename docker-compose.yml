@@ -1,0 +1,67 @@
+# Docker Compose file for the t3rn executor service
+# Documentation: https://docs.t3rn.io/executor/executor-overview
+
+version: '3.8'
+
+services:
+  executor:
+    # Pin version of the executor image to a specific version, instead of using 'latest'
+    image: ghcr.io/t3rn/executor:latest
+    platform: linux/amd64
+    environment:
+      #
+      # This private key is from hardhat Account #0
+      #
+      # WARNING: This account, and it's private key, is publicly known.
+      # Any funds sent to it on Mainnet or any other live network WILL BE LOST.
+      PRIVATE_KEY_LOCAL: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80" 
+      
+      ENVIRONMENT: "testnet"
+
+      # Minimum balance threshold in ETH
+      EXECUTOR_MIN_BALANCE_THRESHOLD_ETH: "1"  # Default: 3 ETH
+
+      # Enable or disable the arbitrage strategy
+      EXECUTOR_USE_ARBITRAGE_STRATEGY: "true"
+      ARBITRAGE_STRATEGY: "{}"  # Default: empty JSON object
+
+      # Enabled networks for the executor
+      EXECUTOR_ENABLED_NETWORKS: "arbitrum-sepolia,base-sepolia,optimism-sepolia,monad-testnet,unichain-sepolia"  # Default: specified networks
+
+      # Enabled assets for the executor
+      # EXECUTOR_ENABLED_ASSETS: "eth,t3eth,t3usd,t3btc,t3mon,t3sei,mon,sei,bnb,t3sol,lrn,bera,t3tia"  # Default: specified assets
+      EXECUTOR_ENABLED_ASSETS: "eth"  
+
+      LOG_LEVEL: "info"
+      LOG_PRETTY: "false" # required for binary to work properly
+
+      #
+      # Pending Orders
+      # Enable or disable order processing
+      EXECUTOR_PROCESS_ORDERS_ENABLED: "true"  # Default: true
+      
+      # Pending orders processing via API
+      EXECUTOR_PROCESS_ORDERS_API_ENABLED: "true"  # Default: true
+      EXECUTOR_PROCESS_ORDERS_API_INTERVAL_SEC: "10"  # Default: 10 seconds
+      
+      #
+      # Pending Executions
+      # Enable or disable pending executions processing
+      EXECUTOR_PROCESS_PENDING_EXECUTIONS_ENABLED: "true"  # Default: true
+      
+      # Pending executions processing via API
+      EXECUTOR_PROCESS_PENDING_EXECUTIONS_API_ENABLED: "true"  # Default: true
+      EXECUTOR_PROCESS_PENDING_EXECUTIONS_API_INTERVAL_SEC: "10"  # Default: 10 seconds
+      
+      # Halt execution based on a specific ratio
+      EXECUTOR_HALT_BASED_ON_RATIO: "false"  # Default: false
+      
+      # Enable or disable ad-hoc execution
+      EXECUTOR_AD_HOC_EXECUTE: "true"  # Default: true
+
+    # Uncomment the following lines to enable persistent storage
+    # logging:
+    #   driver: "json-file"
+    #   options:
+    #     max-size: "500k"
+    #     max-file: "3"

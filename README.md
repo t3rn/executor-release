@@ -5,11 +5,53 @@
 ### Follow the [Setup Guide](https://docs.t3rn.io/executor/become-an-executor/binary-setup) in our technical documentation or dive straight into the hands-on guide below for a quick and practical setup walkthrough.
 
 
-# T3rn Executor Setup Guide
+# t3rn Executor Setup Guide
 
-This guide provides step-by-step instructions for setting up the T3rn Executor on Ubuntu and macOS systems.
+This guide provides step-by-step instructions for setting up the t3rn Executor. It can be either run as standalone binary or as docker image. For simplicity we added docker compose for one click deployment.
 
-## Initial Setup
+### Configure Executor
+
+```bash
+# Node Environment
+export NODE_ENV=testnet
+
+# Logging Configuration
+export LOG_LEVEL=debug
+export LOG_PRETTY=false
+```
+
+#### Private Key Configuration
+```bash
+# Set your private key (replace with your actual private key)
+export PRIVATE_KEY_LOCAL=your_private_key_here
+```
+
+> ⚠️ **Security Note**: We strongly recommend using a dedicated wallet for your Executor role, separate from your primary wallet.
+
+#### Network and Asset Configuration
+```bash
+export EXECUTOR_ENABLED_NETWORKS='arbitrum,binance,ethereum,optimism,base,linea'
+export EXECUTOR_ENABLED_ASSETS='eth,bnb'
+```
+
+#### RPC Configuration
+
+Configure custom RPCs
+
+```bash
+export RPC_ENDPOINTS='{"l0rn":[],"l1rn":[],"l2rn":[],"l3rn":[],"zero":[],"t1rn":[],"t2rn":[],"t3rn":[],"lol3":[],"lold":[],"lols":[],"arbm":[],"arbt":[],"basm":[],"bast":[],"bsct":[],"bscm":[],"ethm":[],"sept":[],"linm":[],"lint":[],"optm":[],"opst":[],"absm":[],"monm":[],"mont":[],"abst":[],"berm":[],"bert":[],"lskm":[],"lskt":[],"ctim":[],"ctit":[],"unim":[],"unit":[],"blsm":[],"blst":[],"scrm":[],"scrt":[]}'  
+```
+
+## Running with Docker image
+
+Running latest executor.
+`docker compose up`
+
+> ⚠️ **Note**: We strongly recommend pinning executor version in docker compose file.
+
+## Running Binary
+
+### Initial Setup
 
 First, create and navigate to the t3rn directory:
 
@@ -18,9 +60,9 @@ mkdir t3rn
 cd t3rn
 ```
 
-## Download and Installation
+### Download and Installation
 
-### For Ubuntu
+#### For Ubuntu
 ```bash
 # Download latest release
 curl -s https://api.github.com/repos/t3rn/executor-release/releases/latest | \
@@ -34,7 +76,7 @@ tar -xzf executor-linux-*.tar.gz
 cd executor/executor/bin
 ```
 
-### For macOS
+#### For macOS
 ```bash
 # Download latest release
 curl -s https://api.github.com/repos/t3rn/executor-release/releases/latest | \
@@ -52,54 +94,6 @@ cd executor/executor/bin
 ## Environment Configuration
 
 Set up your environment variables by copying and pasting these commands into your terminal:
-
-### Basic Settings
-```bash
-# Node Environment
-export NODE_ENV=testnet
-
-# Logging Configuration
-export LOG_LEVEL=debug
-export LOG_PRETTY=false
-
-# Process Settings
-export EXECUTOR_PROCESS_ORDERS=true
-export EXECUTOR_PROCESS_CLAIMS=true
-
-# Specify limit on gas usage(default = 10 gwei)
-export EXECUTOR_MAX_L3_GAS_PRICE=100
-```
-
-### Private Key Configuration
-```bash
-# Set your private key (replace with your actual private key)
-export PRIVATE_KEY_LOCAL=your_private_key_here
-```
-
-> ⚠️ **Security Note**: We strongly recommend using a dedicated wallet for your Executor role, separate from your primary wallet.
-
-### Network Configuration
-```bash
-# Enable networks
-export ENABLED_NETWORKS='arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn'
-export RPC_ENDPOINTS_L1RN='https://brn.rpc.caldera.xyz/'
-```
-
-
-### Optional RPC Configuration
-By default, `EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true`. If you want to use custom RPCs:
-
-```bash
-# Set to false to use custom RPCs
-export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false
-
-# Configure custom RPCs (optional)
-# Replace url1.io and url2.io with your actual RPC URLs
-export RPC_ENDPOINTS_ARBT='https://url1.io,https://url2.io'  # For Arbitrum Sepolia
-export RPC_ENDPOINTS_BSSP='https://url1.io,https://url2.io'  # For Base Sepolia
-export RPC_ENDPOINTS_BLSS='https://url1.io,https://url2.io'  # For Blast Sepolia
-export RPC_ENDPOINTS_OPSP='https://url1.io,https://url2.io'  # For Optimism Sepolia
-```
 
 ## Starting the Executor
 
@@ -165,4 +159,3 @@ For further assistance, join our [Discord community](https://discord.com/invite/
 
 - Available networks: `arbitrum-sepolia`, `base-sepolia`, `blast-sepolia`, `optimism-sepolia`, `l1rn`
 - Supported network shortnames for RPC configuration: `arbt`, `bssp`, `blss`, `opsp`
-- The executor will automatically disable networks where your wallet balance falls below the threshold
