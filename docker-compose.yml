@@ -1,0 +1,61 @@
+# Docker Compose file for the t3rn executor service
+# Documentation: https://docs.t3rn.io/executor/executor-overview
+
+version: '3.8'
+
+services:
+  executor:
+    # Pin version of the executor image to a specific version, instead of using 'latest'
+    image: ghcr.io/t3rn/executor:latest
+    platform: linux/amd64
+    env_file: ".envrc"
+
+    # environment:
+    #   Override RPC endpoints for the executor if not using the default ones
+    #   RPC_ENDPOINTS= >
+    #     {
+    #       "l0rn": [],
+    #       "l1rn": [],
+    #       "l2rn": [],
+    #       "l3rn": [],
+    #       "zero": [],
+    #       "t0rn": [],
+    #       "t1rn": [],
+    #       "t2rn": [],
+    #       "t3rn": [],
+    #       "arbm": [],
+    #       "arbt": [],
+    #       "basm": [],
+    #       "bast": [],
+    #       "bsct": [],
+    #       "bscm": [],
+    #       "ethm": [],
+    #       "sept": [],
+    #       "linm": [],
+    #       "lint": [],
+    #       "optm": [],
+    #       "opst": [],
+    #       "absm": [],
+    #       "monm": [],
+    #       "mont": [],
+    #       "abst": [],
+    #       "berm": [],
+    #       "bert": [],
+    #       "lskm": [],
+    #       "lskt": [],
+    #       "ctim": [],
+    #       "ctit": [],
+    #       "unim": [],
+    #       "unit": [],
+    #       "blsm": [],
+    #       "blst": [],
+    #       "scrm": [],
+    #       "scrt": []
+    #     }
+
+    # Uncomment the following lines to enable persistent storage
+    # logging:
+    #   driver: "json-file"
+    #   options:
+    #     max-size: "500k"
+    #     max-file: "3"
