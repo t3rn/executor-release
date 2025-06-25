@@ -9,6 +9,8 @@ services:
     image: ghcr.io/t3rn/executor:latest
     platform: linux/amd64
     env_file: ".envrc"
+    # env_file: ".envrc.local"
+
 
     # environment:
     #   Override RPC endpoints for the executor if not using the default ones
