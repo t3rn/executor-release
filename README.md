@@ -4,66 +4,43 @@
 
 ### Follow the [Setup Guide](https://docs.t3rn.io/executor/become-an-executor/binary-setup) in our technical documentation or dive straight into the hands-on guide below for a quick and practical setup walkthrough.
 
-
 # t3rn Executor Setup Guide
 
 This guide provides step-by-step instructions for setting up the t3rn Executor. It can be either run as standalone binary or as docker image. For simplicity we added docker compose for one click deployment.
 
-### Configure Executor
+## Configure Executor
 
-```bash
-# Node Environment
-export NODE_ENV=testnet
+Most important and secure information in `exexecutor` `PRIVATE_KEY`. Make sure to keep it safe.
 
-# Logging Configuration
-export LOG_LEVEL=debug
-export LOG_PRETTY=false
-```
+Please refer to documentation and [.envrc](./envrc)  to see available `executor` settings.
 
-#### Private Key Configuration
-```bash
-# Set your private key (replace with your actual private key)
-export PRIVATE_KEY_LOCAL=your_private_key_here
-```
+You can also override easily RPC_ENDPOINTS in [docker-compose.yml](./docker-compose.yml) file .
 
-> ⚠️ **Security Note**: We strongly recommend using a dedicated wallet for your Executor role, separate from your primary wallet.
+## Running Executor
 
-#### Network and Asset Configuration
-```bash
-export EXECUTOR_ENABLED_NETWORKS='arbitrum,binance,ethereum,optimism,base,linea'
-export EXECUTOR_ENABLED_ASSETS='eth,bnb'
-```
+### Running with docker-compose
 
-#### RPC Configuration
-
-Configure custom RPCs
-
-```bash
-export RPC_ENDPOINTS='{"l0rn":[],"l1rn":[],"l2rn":[],"l3rn":[],"zero":[],"t1rn":[],"t2rn":[],"t3rn":[],"lol3":[],"lold":[],"lols":[],"arbm":[],"arbt":[],"basm":[],"bast":[],"bsct":[],"bscm":[],"ethm":[],"sept":[],"linm":[],"lint":[],"optm":[],"opst":[],"absm":[],"monm":[],"mont":[],"abst":[],"berm":[],"bert":[],"lskm":[],"lskt":[],"ctim":[],"ctit":[],"unim":[],"unit":[],"blsm":[],"blst":[],"scrm":[],"scrt":[]}'  
-```
-
-## Running with Docker image
+Our image is hosted in [`ghcr`](https://github.com/t3rn/t3rn/pkgs/container/executor). 
 
 Running latest executor.
 `docker compose up`
 
-> ⚠️ **Note**: We strongly recommend pinning executor version in docker compose file.
+> ⚠️ **Note**: It is not advised to use `latest` image as it can contain breaking changes. We strongly recommend pinning executor version in docker compose file.
 
-## Running Binary
+### Running Binary
 
-### Initial Setup
-
-First, create and navigate to the t3rn directory:
+Once all configurations are set, start the executor:
 
 ```bash
-mkdir t3rn
-cd t3rn
+./executor
 ```
 
-### Download and Installation
+#### Download and Installation
 
-#### For Ubuntu
+##### For Ubuntu
 ```bash
+mkdir t3rn && cd t3rn
+
 # Download latest release
 curl -s https://api.github.com/repos/t3rn/executor-release/releases/latest | \
 grep -Po '"tag_name": "\K.*?(?=")' | \
@@ -76,8 +53,10 @@ tar -xzf executor-linux-*.tar.gz
 cd executor/executor/bin
 ```
 
-#### For macOS
+##### For macOS
 ```bash
+mkdir t3rn && cd t3rn
+
 # Download latest release
 curl -s https://api.github.com/repos/t3rn/executor-release/releases/latest | \
 grep -o '"tag_name": "[^"]*' | \
@@ -91,17 +70,12 @@ tar -xzf executor-macos-*.tar.gz
 cd executor/executor/bin
 ```
 
-## Environment Configuration
+#### Verification (Optional)
 
-Set up your environment variables by copying and pasting these commands into your terminal:
-
-## Starting the Executor
-
-Once all configurations are set, start the executor:
-
-```bash
-./executor
-```
+To verify the executor is running correctly:
+1. Check the terminal output for any error messages
+2. Monitor the logs using the configured log level
+3. Verify network connections to enabled networks
 
 ## Running Executor in Background
 
@@ -136,13 +110,6 @@ tmux new -s t3rn-executor
 ### Option 3: Using systemd (Ubuntu Only, For Advanced Users)
 For a permanent solution that starts automatically on boot, you can create a systemd service. Contact your system administrator or refer to systemd documentation for setup.
 
-
-## Verification (Optional)
-
-To verify the executor is running correctly:
-1. Check the terminal output for any error messages
-2. Monitor the logs using the configured log level
-3. Verify network connections to enabled networks
 
 ## Troubleshooting
 
