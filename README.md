@@ -25,7 +25,7 @@ Follow the [Executor Guide](https://docs.t3rn.io/executor/executor-overview) in 
 
 The most important and sensitive information in `executor` is the `PRIVATE_KEY`. Make sure to keep it safe.
 
-Please refer to the documentation and [.envrc](./envrc) to see available `executor` settings.
+Please refer to the documentation and [.envrc](./.envrc) to see available `executor` settings.
 
 You can also easily override RPC_ENDPOINTS in the [docker-compose.yml](./docker-compose.yml) file by editing the YAML.
 
