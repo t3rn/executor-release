@@ -38,6 +38,9 @@ Running the latest executor:
 
 > ⚠️ **Note**: It is not advised to use the `latest` image as it can contain breaking changes. We strongly recommend pinning the executor version in your Docker Compose file.
 
+<details>
+<summary>Running Binary</summary>
+
 ### Running Binary
 
 Once all configurations are set, start the executor:
@@ -121,6 +124,7 @@ tmux new -s t3rn-executor
 ### Option 3: Using systemd (Ubuntu Only, For Advanced Users)
 For a permanent solution that starts automatically on boot, you can create a systemd service. Contact your system administrator or refer to systemd documentation for setup.
 
+</details>
 
 ## Troubleshooting
 
