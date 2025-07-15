@@ -21,6 +21,7 @@ services:
 
       PRIVATE_KEY_LOAD_FROM_FILE: "true"
       PRIVATE_KEY_PATH: "/run/secrets/private-key-mainnet-trn"
+      # PRIVATE_KEY_LOCAL: ""
 
       # Override RPC endpoints for the executor if not using the default ones
       # RPC_ENDPOINTS: >

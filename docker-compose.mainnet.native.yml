@@ -24,6 +24,7 @@ services:
 
       PRIVATE_KEY_LOAD_FROM_FILE: "true"
       PRIVATE_KEY_PATH: "/run/secrets/private-key-mainnet-native"
+      # PRIVATE_KEY_LOCAL: ""
 
       EXECUTOR_USE_ARBITRAGE_STRATEGY: "false"
       
