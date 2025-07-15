@@ -1,8 +1,6 @@
 # Docker Compose file for the t3rn executor service
 # Documentation: https://docs.t3rn.io/executor/executor-overview
 
-version: '3.8'
-
 services:
   executor:
     # Pin version of the executor image to a specific version, instead of using 'latest'
@@ -54,10 +52,3 @@ services:
     #       "scrm": [],
     #       "scrt": []
     #     }
-
-    # Uncomment the following lines to enable persistent storage
-    # logging:
-    #   driver: "json-file"
-    #   options:
-    #     max-size: "500k"
-    #     max-file: "3"

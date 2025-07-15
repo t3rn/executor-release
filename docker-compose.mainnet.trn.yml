@@ -1,0 +1,39 @@
+# Docker Compose file for the t3rn executor service
+# Documentation: https://docs.t3rn.io/executor/executor-overview
+
+services:
+  executor:
+    # Pin version of the executor image to a specific version, instead of using 'latest'
+    image: ghcr.io/t3rn/executor:latest
+    platform: linux/amd64
+
+    env_file: ".envrc.docker"
+    secrets:
+      - private-key-mainnet-trn
+
+    environment:
+      ENVIRONMENT: "mainnet"
+      EXECUTOR_ENABLED_NETWORKS: "t3rn,optimism,binance,linea,base,arbitrum,ethereum"
+      NETWORKS_DISABLED: "monad-testnet,arbitrum-sepolia,base-sepolia,berachain-bepolia,binance-testnet,blast-sepolia,linea-sepolia,lisk-sepolia,optimism-sepolia,sei-testnet,unichain-sepolia,abstract-sepolia,skale-sepolia,gnosis-testnet"
+
+      EXECUTOR_MIN_BALANCE_THRESHOLD_ETH: "0"
+      EXECUTOR_ENABLED_ASSETS: "trn"  
+
+      PRIVATE_KEY_LOAD_FROM_FILE: "true"
+      PRIVATE_KEY_PATH: "/run/secrets/private-key-mainnet-trn"
+
+      # Override RPC endpoints for the executor if not using the default ones
+      # RPC_ENDPOINTS: >
+      #   {
+      #     "t3rn": ["https://t3rn.calderachain.xyz/http"],
+      #     "arbm": [],
+      #     "basm": [],
+      #     "ethm": [],
+      #     "linm": [],
+      #     "optm": [],
+      #     "bscm": []
+      #   }
+
+secrets:
+  private-key-mainnet-native:
+    file: ./secrets/private-key-mainnet-trn

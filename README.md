@@ -1,8 +1,10 @@
 - [Executor Release](#executor-release)
-  - [Configure Executor](#configure-executor)
   - [Running Executor](#running-executor)
-    - [Running with Docker Compose](#running-with-docker-compose)
-    - [Running Binary](#running-binary)
+  - [Configure Executor](#configure-executor)
+    - [Private Key](#private-key)
+    - [Funds](#funds)
+    - [Environment Variables](#environment-variables)
+  - [Running with Docker Compose](#running-with-docker-compose)
     - [Installation](#installation)
       - [For Ubuntu](#for-ubuntu)
       - [For macOS](#for-macos)
@@ -17,31 +19,59 @@
 # Executor Release
 
 This repository hold binary versions of [Executor Binary](https://github.com/t3rn/executor-release/releases/)  
+Executor is a core component of the t3rn ecosystem, responsible for executing cross-chain transactions and bridging assets across different networks. It is designed to be modular and extensible, allowing it to support various assets and networks seamlessly.
 Our Docker image is hosted in [`ghcr`](https://github.com/t3rn/t3rn/pkgs/container/executor)
 
 Follow the [Executor Guide](https://docs.t3rn.io/executor/executor-overview) in our technical documentation or dive straight into the hands-on guide below for a quick and practical setup walkthrough.
 
-## Configure Executor
-
-The most important and sensitive information in `executor` is the `PRIVATE_KEY`. Make sure to keep it safe.
-
-Please refer to the documentation and [.envrc](./.envrc) to see available `executor` settings.
-
-You can also easily override RPC_ENDPOINTS in the [docker-compose.yml](./docker-compose.yml) file by editing the YAML.
-
 ## Running Executor
 
-### Running with Docker Compose
+Executor can be configured to run and bridge different assets on different networks.  
+We recommend running Executor in a Docker container for ease of use and management, you can pick any orchestration for it like Docker Compose, Kubernetes, or Nomad.
+We provide a Docker Compose file for simplicity and quick setup, but you can also run the binary directly if you prefer.
 
-Running the latest executor:  
+For mainnet there are three different executor configurations available:
+- **Native**: For native assets on t3rn and other networks (e.g. ETH, BSC, etc.)
+- **Tokens**: For ERC20 tokens on t3rn and other networks (e.g. USDC, DAI, t3* tokens, etc.)
+- **TRN**: For t3rn native assets and tokens on T3rn
+
+## Configure Executor
+
+### Private Key
+
+The most important and sensitive information in `executor` is the `PRIVATE_KEY`. Make sure to keep it safe.  
+Depending on which executor flavour you want to run we recommend adding file which will keep it. Using environment variables is less safe.
+
+For **mainnet native** it's `./secrets/private-key-mainnet-native`  
+For **mainnet tokens** it's `./secrets/private-key-mainnet-tokens`  
+For **mainnet trn** it's `./secrets/private-key-mainnet-trn`
+
+### Funds
+
+Make sure to have sufficient funds in your wallet for each network you want to bridge assets on.  
+Each executor is obligate to participate in Bid Auction and needs to have sufficient balance to cover the gas fees for the transactions in TRN on t3rn network.
+
+### Environment Variables
+
+Please refer to the [documentation](https://docs.t3rn.io) and [.envrc](./.envrc) to see available `executor` settings.  
+Each setting can be overridden in the `docker compose`, which takes precedence over the `.envrc` file.
+
+## Running with Docker Compose
+
+Running the latest executor for testnet:  
 `docker compose up`
+
+Running executor for mainnet:
+- **Native**: `docker compose -f docker-compose.mainnet.native.yml up`
+- **Tokens**: `docker compose -f docker-compose.mainnet.tokens.yml up`
+- **TRN**: `docker compose -f docker-compose.mainnet.trn.yml up`
 
 > ⚠️ **Note**: It is not advised to use the `latest` image as it can contain breaking changes. We strongly recommend pinning the executor version in your Docker Compose file.
 
-<details>
-<summary>Running Binary</summary>
+> **Note**: Updating executor image can be done by running `docker compose pull`
 
-### Running Binary
+<details>
+<summary>## Running Binary</summary>
 
 Once all configurations are set, start the executor:
 
